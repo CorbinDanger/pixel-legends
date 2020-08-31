@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #20232a;
+  color: #ffffff;
+}
+
 .app {
 }
 
@@ -18,4 +23,25 @@
   display: flex;
   flex-wrap: wrap;
   width: 250px;
+}
+
+
+.color-picker {
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-wrap: wrap;
+  width: 480px;
+}
+
+.swatch {
+  width: 50px;
+  height: 50px;
+  border: 5px solid white;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.swatch.selected {
+  border-color: navy;
+  box-shadow: 0 0 10px 10px #ffffff;
 }
