@@ -6,10 +6,14 @@ import ColorPicker from './color-picker';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    let pixels = Array(25).fill('a');
+
     this.state = {
       rows: 5,
       cols: 5,
-      selectedColor: 'g',
+      selectedColor: 'm',
+      pixelColors: pixels,
     };
   }
 
@@ -32,8 +36,13 @@ class App extends React.Component {
     "p": "#000080", // navy
   };
 
-  handlePixelClick() {
-    alert('TRAVIS IS STUPID!!!!!');
+  handlePixelClick(pixelIndex) {
+    var pixelColors = this.state.pixelColors.slice(0, this.state.pixelColors.length);
+    pixelColors[pixelIndex] = this.state.selectedColor;
+
+    this.setState({
+      pixelColors: pixelColors,
+    })
   }
 
   handleColorPickerClick(colorKey) {
@@ -45,16 +54,17 @@ class App extends React.Component {
   renderPixels() {
     var pixels = [];
 
-    for (let i = 0; i < this.state.rows * this.state.cols; i++) {
+    for (let i = 0; i < this.state.pixelColors.length; i++) {
       pixels.push(
         <Pixel
+          pixelIndex={i}
           key={i}
-          onClick={() => this.handlePixelClick()}
+          color={this.allColors[this.state.pixelColors[i]]}
+          onClick={(x) => this.handlePixelClick(x)}
         />
       );
     }
 
-    console.log(pixels);
     return pixels;
   }
 

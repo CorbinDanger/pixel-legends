@@ -7,11 +7,16 @@ class Pixel extends React.Component {
     }
 
     render() {
+
+        const divStyle = {
+            backgroundColor: this.props.color,
+        }
+
         return (
             <div className="pixel"
-                onClick={() => this.props.onClick()}
+                style={divStyle}
+                onClick={() => this.props.onClick(this.props.pixelIndex)}
             >
-
             </div>
         );
     }
