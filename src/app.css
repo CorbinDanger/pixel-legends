@@ -8,22 +8,18 @@ body {
   color: #ffffff;
 }
 
-.app {
-}
 
 
 .pixel {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
   background-color: yellow;
-  border: 2px solid black;
+  border: 1px solid #20232a;
 
 }
 .grid {
-  background-color: purple;
   display: flex;
   flex-wrap: wrap;
-  width: 250px;
 }
 
 
@@ -45,4 +41,10 @@ body {
 .swatch.selected {
   border-color: navy;
   box-shadow: 0 0 10px 10px #ffffff;
+}
+
+.size-changer label {
+  width: 70px;
+  display: inline-block;
+  text-align: right;
 }

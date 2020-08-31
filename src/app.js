@@ -2,6 +2,7 @@ import React from 'react';
 import './app.css';
 import Pixel from './pixel';
 import ColorPicker from './color-picker';
+import SizeChanger from './size-changer';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,10 +46,47 @@ class App extends React.Component {
     })
   }
 
+  handlePixelMouseEnter(pixelIndex, e) {
+    if (e.buttons !== 1) {
+      return;
+    }
+
+    this.handlePixelClick(pixelIndex);
+  }
+
   handleColorPickerClick(colorKey) {
     this.setState({
       selectedColor: colorKey,
     })
+  }
+
+  handleRowsChange(value) {
+    this.setState({
+      rows: value,
+    }, this.resizeGrid);
+  }
+
+  handleColsChange(value) {
+    this.setState({
+      cols: value,
+    }, this.resizeGrid);
+  }
+
+  resizeGrid() {
+    console.log('cols: ' + this.state.cols);
+    var pixelColors = this.state.pixelColors.slice(0, this.state.pixelColors.length);
+
+    pixelColors.length = this.state.rows * this.state.cols;
+
+    for (let i = 0; i < pixelColors.length; i++) {
+      if (pixelColors[i] == null) {
+        pixelColors[i] = 'a';
+      }
+    }
+
+    this.setState({
+      pixelColors: pixelColors,
+    });
   }
 
   renderPixels() {
@@ -61,6 +99,7 @@ class App extends React.Component {
           key={i}
           color={this.allColors[this.state.pixelColors[i]]}
           onClick={(x) => this.handlePixelClick(x)}
+          onMouseEnter={(x, e) => this.handlePixelMouseEnter(x, e)}
         />
       );
     }
@@ -71,6 +110,11 @@ class App extends React.Component {
   render() {
     var pixels = this.renderPixels();
 
+    const gridStyle = {
+      width: (this.state.cols * 20) + 'px',
+    }
+
+
     return (
       <div className="app">
         <ColorPicker
@@ -78,8 +122,15 @@ class App extends React.Component {
           selectedColor={this.state.selectedColor}
           onClick={(x) => this.handleColorPickerClick(x)}
         />
-        CORBIN IS COOL TRAVIS IS NOT
-        <div className="grid">
+        <SizeChanger
+          rows={this.state.rows}
+          cols={this.state.cols}
+          onRowsChange={(x) => this.handleRowsChange(x)}
+          onColsChange={(x) => this.handleColsChange(x)}
+        />
+        <div className="grid"
+          style={gridStyle}
+        >
           {pixels}
         </div>
 

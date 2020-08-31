@@ -16,6 +16,7 @@ class Pixel extends React.Component {
             <div className="pixel"
                 style={divStyle}
                 onClick={() => this.props.onClick(this.props.pixelIndex)}
+                onMouseEnter={(e) => this.props.onMouseEnter(this.props.pixelIndex, e)}
             >
             </div>
         );
