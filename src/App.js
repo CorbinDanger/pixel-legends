@@ -1,10 +1,12 @@
 import React from 'react';
 import './app.css';
+import Pixel from './pixel';
 
 function App() {
   return (
     <div className="App">
-      corbin is cool
+      CORBIN IS COOL TRAVIS IS NOT
+      <Pixel />
     </div>
   );
 }
