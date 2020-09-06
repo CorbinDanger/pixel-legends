@@ -121,21 +121,23 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <ColorPicker
-          allColors={this.allColors}
-          selectedColor={this.state.selectedColor}
-          onClick={(x) => this.handleColorPickerClick(x)}
-        />
-        <SizeChanger
-          rows={this.state.rows}
-          cols={this.state.cols}
-          onRowsChange={(x) => this.handleRowsChange(x)}
-          onColsChange={(x) => this.handleColsChange(x)}
-        />
         <div className="grid"
           style={gridStyle}
         >
           {pixels}
+        </div>
+        <div class="toolbar">
+          <ColorPicker
+            allColors={this.allColors}
+            selectedColor={this.state.selectedColor}
+            onClick={(x) => this.handleColorPickerClick(x)}
+          />
+          <SizeChanger
+            rows={this.state.rows}
+            cols={this.state.cols}
+            onRowsChange={(x) => this.handleRowsChange(x)}
+            onColsChange={(x) => this.handleColsChange(x)}
+          />
         </div>
 
       </div>

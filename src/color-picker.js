@@ -9,6 +9,7 @@ class ColorPicker extends React.Component {
     renderColors() {
         var allColors = this.props.allColors;
         var elements = [];
+        let i = 0;
 
         for (const key in allColors) {
             if (allColors.hasOwnProperty(key)) {
@@ -32,6 +33,12 @@ class ColorPicker extends React.Component {
                         >
                     </div>
                 );
+
+                if (++i === 8) {
+                    elements.push(
+                        <div class="break"></div>
+                    )
+                }
             }
         }
         return elements;
