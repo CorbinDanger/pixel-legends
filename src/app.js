@@ -154,6 +154,9 @@ class App extends React.Component {
 
   deserialize() {
     let hash = window.location.hash;
+    if (!hash) {
+      return;
+    }
     let hashSplit = hash.split(',');
     let cols = hashSplit[1];
     let pixels = hashSplit[2].split('');
