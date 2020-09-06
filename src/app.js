@@ -37,13 +37,17 @@ class App extends React.Component {
     "p": "#000080", // navy
   };
 
+  componentDidMount() {
+    this.deserialize();
+  }
+
   handlePixelClick(pixelIndex) {
     var pixelColors = this.state.pixelColors.slice(0, this.state.pixelColors.length);
     pixelColors[pixelIndex] = this.state.selectedColor;
 
     this.setState({
       pixelColors: pixelColors,
-    })
+    }, this.serialize)
   }
 
   handlePixelMouseEnter(pixelIndex, e) {
@@ -86,7 +90,7 @@ class App extends React.Component {
 
     this.setState({
       pixelColors: pixelColors,
-    });
+    }, this.serialize);
   }
 
   renderPixels() {
@@ -136,7 +140,37 @@ class App extends React.Component {
 
       </div>
     );
+  }
 
+  serialize() {
+    let result = `1,${this.state.cols},`;
+
+    for (let i = 0; i < this.state.pixelColors.length; i++) {
+      result += this.state.pixelColors[i];
+    }
+
+    window.location.hash = result;
+  }
+
+  deserialize() {
+    let hash = window.location.hash;
+    let hashSplit = hash.split(',');
+    let cols = hashSplit[1];
+    let pixels = hashSplit[2].split('');
+    let rows = pixels.length / cols;
+
+    let remainder = pixels.length % cols;
+
+    if (remainder !== 0) {
+      console.log('corrupt url!');
+      return;
+    }
+
+    this.setState({
+      cols: cols,
+      rows: rows,
+      pixelColors: pixels,
+    });
   }
 }
 
