@@ -1,0 +1,15 @@
+build
+*/node_modules
+*/bin
+*/obj
+packages
+Documentation
+TestResults
+.git
+.gitignore
+.vs
+.vscode
+*/log
+*/.vscode
+*/.vs
+Dockerfile
